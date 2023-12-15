@@ -12,9 +12,9 @@ public class BasicMovement : MonoBehaviour
     [SerializeField] private bool seePlayer = false;
 
     [SerializeField] private Transform groundCheck;
-    [SerializeField] private Transform playerTransform;
+    [SerializeField] private LayerMask playerlayer;
 
-    [SerializeField] private float range;
+    [SerializeField] private Vector2 rangeVision = new Vector2(4, 1);
 
     private Rigidbody2D rig;
     
@@ -34,8 +34,34 @@ public class BasicMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RaycastHit2D ground = Physics2D.Raycast(groundCheck.position, Vector2.down, distance);
+        detectBorder();
 
+        findPlayer();
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireCube(transform.position, rangeVision);
+    }
+
+    private void findPlayer()
+    {
+        Collider2D coll = Physics2D.OverlapBox(transform.position, rangeVision, 0f, playerlayer);
+        if (coll != null)
+        {
+            seePlayer = true;
+            Debug.Log("Player encontrado");
+        }
+        else
+        {
+            seePlayer = false;
+        }
+    }
+
+    private void detectBorder()
+    {
+        RaycastHit2D ground = Physics2D.Raycast(groundCheck.position, Vector2.down, distance);
+        
         if (!ground.collider)
         {
             isRight = !isRight;
@@ -44,8 +70,5 @@ public class BasicMovement : MonoBehaviour
             else
                 transform.eulerAngles = new Vector3(0, 180, 0);
         }
-
-        Vector2 posicaoAlvo = playerTransform.position;
-        Vector2 posicaoAtual = transform.position;
     }
 }
