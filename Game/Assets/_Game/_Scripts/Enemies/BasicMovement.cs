@@ -6,11 +6,15 @@ using UnityEngine;
 
 public class BasicMovement : MonoBehaviour
 {
-    [SerializeField] private float speed = 5f;
-    [SerializeField] private float distance;
+    [SerializeField] private float speed = 0.03f;
+    [SerializeField] private float distance = 1;
     [SerializeField] private bool isRight = true;
+    [SerializeField] private bool seePlayer = false;
 
     [SerializeField] private Transform groundCheck;
+    [SerializeField] private Transform playerTransform;
+
+    [SerializeField] private float range;
 
     private Rigidbody2D rig;
     
@@ -18,14 +22,13 @@ public class BasicMovement : MonoBehaviour
     void Start()
     {
         rig = GetComponent<Rigidbody2D>();
+        groundCheck = transform.GetChild(0).GetComponent<Transform>();
     }
 
     private void FixedUpdate()
     {
-        if(isRight)
+        if(!seePlayer)
             transform.Translate(Vector2.right * speed);
-        else
-            transform.Translate(Vector2.left * speed);
     }
 
     // Update is called once per frame
@@ -34,6 +37,15 @@ public class BasicMovement : MonoBehaviour
         RaycastHit2D ground = Physics2D.Raycast(groundCheck.position, Vector2.down, distance);
 
         if (!ground.collider)
+        {
             isRight = !isRight;
+            if(isRight)
+                transform.eulerAngles = new Vector3(0, 0, 0);
+            else
+                transform.eulerAngles = new Vector3(0, 180, 0);
+        }
+
+        Vector2 posicaoAlvo = playerTransform.position;
+        Vector2 posicaoAtual = transform.position;
     }
 }
