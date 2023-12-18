@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,12 +6,13 @@ public class BasicMovement : MonoBehaviour
     [SerializeField] private float speed = 0.03f;
     [SerializeField] private float distance = 1;
     [SerializeField] private bool isRight = true;
-    [SerializeField] private bool seePlayer = false;
+    private bool seePlayer = false;
 
     [SerializeField] private Transform groundCheck;
+    [SerializeField] private Transform player;
     [SerializeField] private LayerMask playerlayer;
 
-    [SerializeField] private Vector2 rangeVision = new Vector2(4, 1);
+    [SerializeField] private Vector2 rangeVision = new Vector2(4, 3);
 
     private Rigidbody2D rig;
     
@@ -34,23 +32,40 @@ public class BasicMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        detectBorder();
+        DetectBorder();
 
-        findPlayer();
+        FindPlayer();
     }
-
+    
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position, rangeVision);
+        if(seePlayer)
+            Gizmos.DrawLine(transform.position, player.position);
     }
 
-    private void findPlayer()
+    private void FindPlayer()
     {
         Collider2D coll = Physics2D.OverlapBox(transform.position, rangeVision, 0f, playerlayer);
         if (coll != null)
         {
+            Vector2 position = transform.position;
+            Vector2 playerPosition = player.position;
+            Vector2 direction = playerPosition - position;
+            RaycastHit2D hit = Physics2D.Raycast(position, direction.normalized);
+            if (hit.transform != null)
+            {
+                if (hit.transform.CompareTag("Player"))
+                {
+                    Debug.Log("Encontrou o player");
+                }
+                else
+                {
+                    Debug.Log(hit.transform.name);
+                    Debug.Log("Player na area, mas algo atrapalha");
+                }
+            }
             seePlayer = true;
-            Debug.Log("Player encontrado");
         }
         else
         {
@@ -58,7 +73,7 @@ public class BasicMovement : MonoBehaviour
         }
     }
 
-    private void detectBorder()
+    private void DetectBorder()
     {
         RaycastHit2D ground = Physics2D.Raycast(groundCheck.position, Vector2.down, distance);
         
