@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ public class BasicMovement : MonoBehaviour
     [SerializeField] private float speed = 0.03f;
     [SerializeField] private float distance = 1;
     [SerializeField] private bool isRight = true;
-    private bool seePlayer = false;
+    [SerializeField] private bool seePlayer = false;
 
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Transform player;
@@ -25,8 +26,10 @@ public class BasicMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(!seePlayer)
-            transform.Translate(Vector2.right * speed);
+        if (!seePlayer)
+            Movement();
+        else
+            FollowPLayer();
     }
 
     // Update is called once per frame
@@ -50,9 +53,11 @@ public class BasicMovement : MonoBehaviour
         if (coll != null)
         {
             Vector2 position = transform.position;
-            Vector2 playerPosition = player.position;
+            Vector2 playerPosition = coll.transform.position;
             Vector2 direction = playerPosition - position;
-            RaycastHit2D hit = Physics2D.Raycast(position, direction.normalized);
+            Debug.Log(direction.normalized);
+            RaycastHit2D hit = Physics2D.Raycast(position, direction.normalized, playerlayer);
+            //RaycastHit2D hit = Physics2D.Raycast(position, direction.normalized);
             if (hit.transform != null)
             {
                 if (hit.transform.CompareTag("Player"))
@@ -85,5 +90,15 @@ public class BasicMovement : MonoBehaviour
             else
                 transform.eulerAngles = new Vector3(0, 180, 0);
         }
+    }
+    
+    private void Movement()
+    {
+        transform.Translate(Vector2.right * speed);
+    }
+
+    private void FollowPLayer()
+    {
+        
     }
 }
