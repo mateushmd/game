@@ -8,10 +8,12 @@ public class BasicMovement : MonoBehaviour
     [SerializeField] private float distance = 1;
     [SerializeField] private bool isRight = true;
     [SerializeField] private bool seePlayer = false;
+    private bool onBord = false;
 
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Transform player;
     [SerializeField] private LayerMask playerlayer;
+    [SerializeField] private float minDistance;
 
     [SerializeField] private Vector2 rangeVision = new Vector2(4, 3);
 
@@ -55,22 +57,22 @@ public class BasicMovement : MonoBehaviour
             Vector2 position = transform.position;
             Vector2 playerPosition = coll.transform.position;
             Vector2 direction = playerPosition - position;
-            Debug.Log(direction.normalized);
             RaycastHit2D hit = Physics2D.Raycast(position, direction.normalized, playerlayer);
-            //RaycastHit2D hit = Physics2D.Raycast(position, direction.normalized);
             if (hit.transform != null)
             {
                 if (hit.transform.CompareTag("Player"))
                 {
-                    Debug.Log("Encontrou o player");
+                    seePlayer = true;
                 }
                 else
                 {
-                    Debug.Log(hit.transform.name);
-                    Debug.Log("Player na area, mas algo atrapalha");
+                    seePlayer = false;
                 }
             }
-            seePlayer = true;
+            else
+            {
+                seePlayer = false;
+            }
         }
         else
         {
@@ -84,6 +86,19 @@ public class BasicMovement : MonoBehaviour
         
         if (!ground.collider)
         {
+            onBord = true;
+        }
+        else
+        {
+            onBord = false;
+        }
+    }
+    
+    private void Movement()
+    {
+        transform.Translate(Vector2.right * speed);
+        if (onBord)
+        {
             isRight = !isRight;
             if(isRight)
                 transform.eulerAngles = new Vector3(0, 0, 0);
@@ -91,14 +106,32 @@ public class BasicMovement : MonoBehaviour
                 transform.eulerAngles = new Vector3(0, 180, 0);
         }
     }
-    
-    private void Movement()
-    {
-        transform.Translate(Vector2.right * speed);
-    }
 
     private void FollowPLayer()
     {
-        
+        Vector2 playerPosition = player.position;
+        Vector2 position = transform.position;
+
+        float space = Vector2.Distance(position, playerPosition);
+        if (space >= minDistance)
+        {
+
+            Vector2 direction = playerPosition - position;
+            direction = new Vector2(direction.x, 0f);
+
+            if ((direction.x > 0) & (!isRight))
+            {
+                isRight = true;
+                transform.eulerAngles = new Vector3(0, 0, 0);
+            }
+            else if ((direction.x < 0) & (isRight))
+            {
+                isRight = false;
+                transform.eulerAngles = new Vector3(0, 180, 0);
+            }
+
+            if (!onBord)
+                transform.Translate(Vector2.right * speed);
+        }
     }
 }
