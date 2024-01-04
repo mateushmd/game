@@ -4,20 +4,25 @@ using UnityEngine;
 
 public class BasicMovement : MonoBehaviour
 {
+    private Rigidbody2D rig;
+    
+    [Header("Vision")]
+    [SerializeField] private Vector2 rangeVision = new Vector2(4, 3);
+    private float distance = 1;
+    
+    [Header("Movimento")]
     [SerializeField] private float speed = 0.03f;
-    [SerializeField] private float distance = 1;
-    [SerializeField] private bool isRight = true;
-    [SerializeField] private bool seePlayer = false;
-    private bool onBord = false;
-
+    [SerializeField] private float atkDistance;
+    
+    [Header("Components")]
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Transform player;
     [SerializeField] private LayerMask playerlayer;
-    [SerializeField] private float minDistance;
-
-    [SerializeField] private Vector2 rangeVision = new Vector2(4, 3);
-
-    private Rigidbody2D rig;
+    
+    [Header("Tests")]
+    private bool isRight = true;
+    private bool seePlayer = false;
+    private bool onBord = false;
     
     // Start is called before the first frame update
     void Start()
@@ -28,10 +33,10 @@ public class BasicMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!seePlayer)
-            Movement();
-        else
+        if (seePlayer)
             FollowPLayer();
+        else
+            Movement();
     }
 
     // Update is called once per frame
@@ -113,7 +118,7 @@ public class BasicMovement : MonoBehaviour
         Vector2 position = transform.position;
 
         float space = Vector2.Distance(position, playerPosition);
-        if (space >= minDistance)
+        if (space >= atkDistance)
         {
 
             Vector2 direction = playerPosition - position;
