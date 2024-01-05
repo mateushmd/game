@@ -17,6 +17,7 @@ public class BasicMovement : MonoBehaviour
     [Header("Components")]
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Transform player;
+    [SerializeField] private Stats stats;
     [SerializeField] private LayerMask playerlayer;
     
     [Header("Tests")]
@@ -28,6 +29,7 @@ public class BasicMovement : MonoBehaviour
     void Start()
     {
         rig = GetComponent<Rigidbody2D>();
+        stats = GetComponent<Stats>();
         groundCheck = transform.GetChild(0).GetComponent<Transform>();
     }
 

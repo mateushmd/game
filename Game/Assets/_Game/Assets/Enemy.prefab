@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1788757874313468430}
   - component: {fileID: 7258489067234534028}
   - component: {fileID: 8449307711301877588}
+  - component: {fileID: 9100326388140780636}
   - component: {fileID: 7219948408333643931}
   m_Layer: 2
   m_Name: Slime
@@ -125,6 +126,26 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &9100326388140780636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3676489154619629165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 435ab772b8099e8479864a3f3bc20b96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown:
+    cooldownTime: 0
+  maxHP: 0
+  maxMP: 0
+  inteligence: 0
+  force: 0
+  dexterity: 0
+  agility: 0
 --- !u!114 &7219948408333643931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,17 +158,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dce6ecf6fd8309648883898259b0d17e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rangeVision: {x: 4, y: 1.35}
   speed: 0.03
-  distance: 1
-  isRight: 1
-  seePlayer: 0
+  atkDistance: 0
   groundCheck: {fileID: 4031062799740867407}
   player: {fileID: 0}
   playerlayer:
     serializedVersion: 2
     m_Bits: 128
-  minDistance: 3
-  rangeVision: {x: 4, y: 1.35}
 --- !u!1 &8091989075438182884
 GameObject:
   m_ObjectHideFlags: 0
