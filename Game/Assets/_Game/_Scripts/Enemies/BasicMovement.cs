@@ -58,13 +58,14 @@ public class BasicMovement : MonoBehaviour
 
     private void FindPlayer()
     {
-        Collider2D coll = Physics2D.OverlapBox(transform.position, rangeVision, 0f, playerlayer);
+        Collider2D coll = Physics2D.OverlapBox(transform.position, rangeVision, 0f,playerlayer);
         if (coll != null)
         {
             Vector2 position = transform.position;
             Vector2 playerPosition = coll.transform.position;
             Vector2 direction = playerPosition - position;
-            RaycastHit2D hit = Physics2D.Raycast(position, direction.normalized, playerlayer);
+            RaycastHit2D hit = Physics2D.Raycast(position, direction.normalized, 9000f);
+            Debug.Log(hit.transform.name + "          " + coll.name);
             if (hit.transform != null)
             {
                 if (hit.transform.CompareTag("Player"))
