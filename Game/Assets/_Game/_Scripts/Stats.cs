@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Stats : MonoBehaviour
 {
-    [Header("Attributes")]
+    [Header("Attributes")] 
+    [SerializeField] private float HP;
+    [SerializeField] private float MP;
     [SerializeField] private float maxHP; //statID 1
     [SerializeField] private float maxMP; //statID 2
     [SerializeField] private int inteligence; //statID 3
@@ -14,6 +16,42 @@ public class Stats : MonoBehaviour
 
     [Header("(De)buffs")] 
     private List<State> buffs = new List<State>();
+
+    public void HPRecover(float value)
+    {
+        if (maxHP >= (HP + value))
+            HP = maxHP;
+        else HP += value;
+    }
+
+    public void MPRecover(float value)
+    {
+        if (maxMP >= (MP + value))
+            MP = maxMP;
+        else MP += value;
+    }
+
+    public bool decreaseHP(float value)
+    {
+        if (0 >= (HP - value))
+        {
+            return false; //Morte
+        }
+        
+        HP -= value;
+        return true; //Ainda possui HP
+    }
+    
+    public bool decreaseMP(float value)
+    {
+        if (0 > (MP - value))
+        {
+            return false; //Negar ação com uso de MP
+        }
+        
+        MP -= value;
+        return true; //Permitir ação com uso de MP
+    }
     
     public void buffMaxHP(string name, int value,  float time)
     {
