@@ -22,7 +22,7 @@ public class BasicMovement : MonoBehaviour
     
     [Header("Tests")]
     private bool isRight = true;
-    private bool seePlayer = false;
+    [SerializeField] private bool seePlayer = false;
     private bool onBord = false;
     
     // Start is called before the first frame update
@@ -65,6 +65,7 @@ public class BasicMovement : MonoBehaviour
             Vector2 playerPosition = coll.transform.position;
             Vector2 direction = playerPosition - position;
             RaycastHit2D hit = Physics2D.Raycast(position, direction.normalized);
+            Debug.Log(hit.transform.name);
             if (hit.transform != null)
             {
                 if (hit.transform.CompareTag("Player"))

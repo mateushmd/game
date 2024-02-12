@@ -6,6 +6,7 @@ public class DeathOnDamage : MonoBehaviour, IDamageble
 {
     public void TakeDamage(int damage)
     {
-        Destroy(gameObject);
+        Debug.Log(gameObject.name + " foi atingido");
+        //Destroy(gameObject);
     }
 }
