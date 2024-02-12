@@ -64,8 +64,7 @@ public class BasicMovement : MonoBehaviour
             Vector2 position = transform.position;
             Vector2 playerPosition = coll.transform.position;
             Vector2 direction = playerPosition - position;
-            RaycastHit2D hit = Physics2D.Raycast(position, direction.normalized, 9000f);
-            Debug.Log(hit.transform.name + "          " + coll.name);
+            RaycastHit2D hit = Physics2D.Raycast(position, direction.normalized);
             if (hit.transform != null)
             {
                 if (hit.transform.CompareTag("Player"))
