@@ -6,7 +6,6 @@ namespace _Game._Scripts.Enemies
 {
     public class BasicMovement : MonoBehaviour
     {
-
         private Rigidbody2D rig;
 
         [Header("Vision")] [SerializeField] private Vector2 rangeVision = new Vector2(4, 3);

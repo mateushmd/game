@@ -9,8 +9,7 @@ using UnityEngine.Rendering.UI;
 namespace _Game._Scripts.Player
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    [RequireComponent(typeof(IDamageble))]
-    [RequireComponent(typeof(Stats))]
+    
     public class PlayerMovement : MonoBehaviour
     {
         private PlayerInputActions playerInputActions;
@@ -34,8 +33,6 @@ namespace _Game._Scripts.Player
         private bool canJump = true;
         
         [SerializeField] private float jumpHeight = 60f;
-
-        private IDamageble damageable;
         
         // Start is called before the first frame update
         private void Awake()
@@ -45,15 +42,6 @@ namespace _Game._Scripts.Player
             rigidBody = GetComponent<Rigidbody2D>();
 
             groundCheckTransform = transform.GetChild(1).GetComponent<Transform>();
-
-            damageable = GetComponent<IDamageble>();
-            damageable.DamageEvent += onDamage;
-        }
-
-        private void OnDestroy()
-        {
-            if (damageable != null)
-                damageable.DamageEvent -= onDamage;
         }
 
         private void FixedUpdate()
@@ -110,11 +98,6 @@ namespace _Game._Scripts.Player
         {
             move.Disable();
             jump.Disable();
-        }
-
-        private void onDamage()
-        {
-            
         }
     }
 }
