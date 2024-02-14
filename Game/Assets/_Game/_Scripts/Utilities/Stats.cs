@@ -1,12 +1,15 @@
-using System.Collections;
 using System.Collections.Generic;
+using _Game._Scripts.Damage;
 using UnityEngine;
 
-    [RequireComponent(typeof(IDamageble))] 
+namespace _Game._Scripts.Utilities
+{
+    [RequireComponent(typeof(Damageable))]
     public class Stats : MonoBehaviour
     {
-        [Header("Attributes")]
-        [SerializeField] private float HP;
+        [Header("Attributes")] [SerializeField]
+        private float HP;
+
         [SerializeField] private float MP;
         [SerializeField] private float maxHP; //statID 1
         [SerializeField] private float maxMP; //statID 2
@@ -16,8 +19,6 @@ using UnityEngine;
         [SerializeField] private int agility; //statID 6
 
         [Header("(De)buffs")] private List<State> buffs = new List<State>();
-
-        [Header("Components")] private IDamageble damageable;
 
         public void HPRecover(float value)
         {
@@ -97,17 +98,10 @@ using UnityEngine;
             agility += value;
         }
 
-        // Start is called before the first frame update
-        void Start()
+        private void Awake()
         {
-            damageable = GetComponent<IDamageble>();
-            damageable.DamageEvent += onDamage;
-        }
-
-        private void OnDestroy()
-        {
-            if (damageable != null)
-                damageable.DamageEvent -= onDamage;
+            HP = maxHP;
+            MP = maxMP;
         }
 
         // Update is called once per frame
@@ -178,30 +172,69 @@ using UnityEngine;
             return st;
         }
 
-        private void onDamage()
+        public float getHP()
         {
+            return HP;
+        }
+
+        public float getMP()
+        {
+            return MP;
+        }
+
+        public float getMaxHP()
+        {
+            return maxHP;
+        }
+
+        public float getMaxMP()
+        {
+            return maxMP;
+        }
+
+        public int getInteligence()
+        {
+            return inteligence;
+        }
+
+        public int getForce()
+        {
+            return force;
+        }
+
+        public int getDexterity()
+        {
+            return dexterity;
+        }
+
+
+        public int getAgility()
+        {
+            return agility;
+        }
+
+
+        public class State
+        {
+            private Cooldown cooldown = new Cooldown();
+            public string name;
+            public int statID;
+            public int value;
+
+            public State(int statID, string name, int value, float time)
+            {
+                this.statID = statID;
+                this.name = name;
+                this.value = value;
+
+                this.cooldown.setTime(time);
+                this.cooldown.StartCooldown();
+            }
+
+            public bool timeEnd()
+            {
+                return !cooldown.isCoolingDown;
+            }
         }
     }
-
-    public class State
-    {
-        private Cooldown cooldown = new Cooldown();
-        public string name;
-        public int statID;
-        public int value;
-
-        public State(int statID, string name, int value, float time)
-        {
-            this.statID = statID;
-            this.name = name;
-            this.value = value;
-
-            this.cooldown.setTime(time);
-            this.cooldown.StartCooldown();
-        }
-
-        public bool timeEnd()
-        {
-            return !cooldown.isCoolingDown;
-        }
-    }
+}

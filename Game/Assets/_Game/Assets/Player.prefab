@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 8097234193942473045}
   - component: {fileID: 8097234193942473042}
   - component: {fileID: 8097234193942473043}
-  - component: {fileID: 2998274518755878785}
+  - component: {fileID: 4535461039597459376}
   - component: {fileID: 7138721081145066817}
   m_Layer: 7
   m_Name: Player
@@ -187,7 +187,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 136
   jumpHeight: 7
---- !u!114 &2998274518755878785
+--- !u!114 &4535461039597459376
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -196,7 +196,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8097234193942473040}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8cf347defefa0c498c3e199658f94a7, type: 3}
+  m_Script: {fileID: 11500000, guid: b8bb109d9bda3a54ea412afbccfa2da2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &7138721081145066817
@@ -211,8 +211,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 435ab772b8099e8479864a3f3bc20b96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 0
-  maxMP: 0
+  HP: 0
+  MP: 0
+  maxHP: 1500
+  maxMP: 300
   inteligence: 0
   force: 0
   dexterity: 0

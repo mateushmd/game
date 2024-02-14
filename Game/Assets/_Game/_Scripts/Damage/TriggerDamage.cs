@@ -1,17 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class TriggerDamage : MonoBehaviour
+namespace _Game._Scripts.Damage
 {
-    [SerializeField] private int damage = 10;
-    
-    private void OnTriggerEnter2D(Collider2D collision)
+    public class TriggerDamage : MonoBehaviour
     {
-        Debug.Log("Trigger ativado: " + collision.name);
-        IDamageble damageable = collision.GetComponent<IDamageble>();
-        if(damageable != null)
-            damageable.TakeDamage(damage);
+        [SerializeField] private int damage = 10;
+    
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            Debug.Log("Trigger ativado: " + collision.name);
+            Damageable damageable = collision.GetComponent<Damageable>();
+            if(damageable != null)
+            {
+                damageable.TakeDamage(damage);
+                Debug.Log("O objeto atinjido possui um IDamageable");
+            }
+        }
     }
 }
