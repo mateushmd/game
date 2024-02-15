@@ -7,9 +7,8 @@ namespace _Game._Scripts.Utilities
     [RequireComponent(typeof(Damageable))]
     public class Stats : MonoBehaviour
     {
-        [Header("Attributes")] [SerializeField]
-        private float HP;
-
+        [Header("Attributes")] 
+        [SerializeField] private float HP;
         [SerializeField] private float MP;
         [SerializeField] private float maxHP; //statID 1
         [SerializeField] private float maxMP; //statID 2
@@ -17,8 +16,10 @@ namespace _Game._Scripts.Utilities
         [SerializeField] private int force; //statID 4
         [SerializeField] private int dexterity; //statID 5
         [SerializeField] private int agility; //statID 6
+        [SerializeField] private int defense; //statID 7
 
-        [Header("(De)buffs")] private List<State> buffs = new List<State>();
+        [Header("(De)buffs")] 
+        private List<State> buffs = new List<State>();
 
         public void HPRecover(float value)
         {
@@ -98,6 +99,13 @@ namespace _Game._Scripts.Utilities
             agility += value;
         }
 
+        public void buffDefense(string nome, int value, float time)
+        {
+            if (time != 0)
+                buffs.Add(new State(7, name, value, time));
+            defense += value;
+        }
+
         private void Awake()
         {
             HP = maxHP;
@@ -139,6 +147,9 @@ namespace _Game._Scripts.Utilities
                     break;
                 case 6:
                     agility -= value;
+                    break;
+                case 7:
+                    defense -= value;
                     break;
             }
         }
@@ -213,6 +224,10 @@ namespace _Game._Scripts.Utilities
             return agility;
         }
 
+        public int getDefense()
+        {
+            return defense;
+        }
 
         public class State
         {

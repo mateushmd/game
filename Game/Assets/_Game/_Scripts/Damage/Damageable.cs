@@ -1,5 +1,7 @@
+using System;
 using _Game._Scripts.Utilities;
 using UnityEngine;
+using Random = System.Random;
 
 namespace _Game._Scripts.Damage
 {
@@ -14,14 +16,30 @@ namespace _Game._Scripts.Damage
             st = GetComponent<Stats>();
         }
     
-        public void TakeDamage(int damage)
+        public void TakeDamage(float damage)
         {
-            if (st.decreaseHP(damage))
+            Random luck = new Random();
+            //randNum.Next(150)
+            int dodge = luck.Next(100);
+            Debug.Log("Sorte obtida: " + dodge);
+            
+            if(dodge >= st.getAgility())
             {
-                Debug.Log("HP reduzido para: " + st.getHP());
-            } else
+                float myDamage = damage - st.getDefense();
+
+                if (st.decreaseHP(damage))
+                {
+                    Debug.Log("HP reduzido para: " + st.getHP());
+                }
+                else
+                {
+                    Debug.Log("Parabens!!! Sua vida chegou a zero, entao o " + gameObject.name + " morreu");
+                    Destroy(gameObject);
+                }
+            }
+            else
             {
-                Debug.Log("Parabens!!! Sua vida chegou a zero, entao o " + gameObject.name + " morreu");
+                Debug.Log("Desviou do ataque");
             }
         }
     }
