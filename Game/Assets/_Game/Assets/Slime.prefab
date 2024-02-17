@@ -76,7 +76,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38ec11fc6a5d9d74492329a99b9e6823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
 --- !u!58 &4905382715210297792
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -110,7 +109,7 @@ GameObject:
   - component: {fileID: 2533721364679985073}
   m_Layer: 2
   m_Name: Slime
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -253,6 +252,7 @@ MonoBehaviour:
   force: 0
   dexterity: 0
   agility: 0
+  defense: 0
 --- !u!114 &2533721364679985073
 MonoBehaviour:
   m_ObjectHideFlags: 0
