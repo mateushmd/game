@@ -241,6 +241,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4178891809697158634, guid: 217cb95b40cd1bc4f9d973fcdfe9aec9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4178891809697158634, guid: 217cb95b40cd1bc4f9d973fcdfe9aec9, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 7138721081145066817, guid: 217cb95b40cd1bc4f9d973fcdfe9aec9, type: 3}
       propertyPath: agility
       value: 80
