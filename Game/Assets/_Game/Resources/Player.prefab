@@ -249,11 +249,11 @@ MonoBehaviour:
   MP: 0
   maxHP: 1500
   maxMP: 300
-  inteligence: 0
-  force: 0
-  dexterity: 0
+  inteligence: 150
+  force: 150
+  dexterity: 50
   agility: 0
-  defense: 0
+  defense: 50
 --- !u!114 &7233330124088316335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,6 +266,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 323e5c4b4d02633449ef5fd00b4e9941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nRune: 0
+  skill: {fileID: 0}
+  ss: {fileID: 0}
+  skillVelocity: 0
 --- !u!114 &4146479244464002086
 MonoBehaviour:
   m_ObjectHideFlags: 0

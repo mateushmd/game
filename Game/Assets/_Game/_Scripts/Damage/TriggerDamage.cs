@@ -8,21 +8,24 @@ namespace _Game._Scripts.Damage
 {
     public class TriggerDamage : MonoBehaviour
     {
-        private float damageOnForce = 150;
-        private float damageOnInt = 20;
+        //Em porcentagem
+        [SerializeField] private float damageOnForce;
+        [SerializeField] private float damageOnInt;
+        [SerializeField] private float duration;
+        [SerializeField] private bool destroyOnHit;
         private float totalDamage = 0;
         private Stats stats;
         
         private void Awake()
         {
             stats = GetComponentInParent<Stats>();
+            damageOnForce *= stats.getForce();
+            damageOnInt *= stats.getInteligence();
+            totalDamage = damageOnInt + damageOnForce;
         }
 
         private void Update()
         {
-            damageOnForce += stats.getForce();
-            damageOnInt += stats.getInteligence();
-            totalDamage = damageOnInt + damageOnForce;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -31,6 +34,8 @@ namespace _Game._Scripts.Damage
             if(damageable != null)
             {
                 damageable.TakeDamage(totalDamage);
+                if (destroyOnHit)
+                    Destroy(gameObject);
             }
         }
     }

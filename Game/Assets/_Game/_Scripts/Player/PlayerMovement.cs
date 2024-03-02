@@ -12,10 +12,6 @@ namespace _Game._Scripts.Player
     
     public class PlayerMovement : MonoBehaviour
     {
-        private PlayerInputActions playerInputActions;
-        private InputAction move;
-        private InputAction jump;
-        
         private Rigidbody2D rigidBody;
 
         private float axis = 0;
@@ -33,15 +29,17 @@ namespace _Game._Scripts.Player
         private bool canJump = true;
         
         [SerializeField] private float jumpHeight = 60f;
+
+        private InputManager input;
         
-        // Start is called before the first frame update
         private void Awake()
         {
-            playerInputActions = new PlayerInputActions();
-            
             rigidBody = GetComponent<Rigidbody2D>();
 
             groundCheckTransform = transform.GetChild(1).GetComponent<Transform>();
+
+            input = InputManager.Instance;
+            Debug.Log(input);
         }
 
         private void FixedUpdate()
@@ -53,7 +51,7 @@ namespace _Game._Scripts.Player
         // Update is called once per frame
         private void Update()
         {
-            axis = move.ReadValue<Vector2>().normalized.x;
+            axis = input.move.ReadValue<Vector2>().normalized.x;
         }
 
         private void Move()
@@ -83,21 +81,10 @@ namespace _Game._Scripts.Player
                 rigidBody.AddForce(new Vector2(0, jumpHeight), ForceMode2D.Impulse);
             }
         }
-        
+
         private void OnEnable()
         {
-            move = playerInputActions.Player.Move;
-            move.Enable();
-
-            jump = playerInputActions.Player.Jump;
-            jump.Enable();
-            jump.performed += Jump;
-        }
-
-        private void OnDisable()
-        {
-            move.Disable();
-            jump.Disable();
+            input.jump.performed += Jump;
         }
     }
 }

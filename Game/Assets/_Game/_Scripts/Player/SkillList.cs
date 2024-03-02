@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class SkillList : MonoBehaviour
 {
-    private static List<GameObject> skillList;
+    private static List<Skill> skillList = new List<Skill>();
 
-    [SerializeField] private GameObject fireBall;
+     private GameObject fireBall;
     
     void Awake()
     {
-        skillList.Add(fireBall);
-        //skillList.Insert(15553, fireBall);
+        fireBall = Resources.Load<GameObject>("FireBall");
+        skillList.Add(new Skill(15553, fireBall));
     }
 
     // Update is called once per frame
@@ -21,6 +21,25 @@ public class SkillList : MonoBehaviour
 
     public static GameObject getSkillByIndex(int index)
     {
-        return skillList[index];
+        foreach(Skill sk in skillList){
+            if (sk.index == index)
+            {
+                return sk.skillObject;
+            }
+        }
+
+        return null;
+    }
+}
+
+class Skill
+{
+    public int index { get; private set; }
+    public GameObject skillObject { get; private set; }
+
+    public Skill(int i, GameObject so)
+    {
+        index = i;
+        skillObject = so;
     }
 }
