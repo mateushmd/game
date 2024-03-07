@@ -1,6 +1,7 @@
-using UnityEngine;
 using UnityEngine.InputSystem;
 
+namespace _Game._Scripts.Player
+{
     public class InputManager : PersistentSingleton<InputManager>
     {
         private PlayerInputActions playerInputActions;
@@ -53,3 +54,4 @@ using UnityEngine.InputSystem;
             skill5.Disable();
         }
     }
+}

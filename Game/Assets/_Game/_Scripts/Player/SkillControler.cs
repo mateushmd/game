@@ -19,9 +19,9 @@ public class SkillControler : MonoBehaviour
 
     void Awake()
     {
-        input = InputManager.Instance;
-
         nRune = 0;
+        
+        input = InputManager.Instance;
     }
     
     private int getSkillIndex()

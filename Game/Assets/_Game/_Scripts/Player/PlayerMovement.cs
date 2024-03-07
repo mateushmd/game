@@ -37,9 +37,8 @@ namespace _Game._Scripts.Player
             rigidBody = GetComponent<Rigidbody2D>();
 
             groundCheckTransform = transform.GetChild(1).GetComponent<Transform>();
-
+            
             input = InputManager.Instance;
-            Debug.Log(input);
         }
 
         private void FixedUpdate()
