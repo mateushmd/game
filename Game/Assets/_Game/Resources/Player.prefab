@@ -267,8 +267,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nRune: 0
-  skill: {fileID: 0}
-  ss: {fileID: 0}
   skillVelocity: 0
 --- !u!114 &4146479244464002086
 MonoBehaviour:

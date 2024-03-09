@@ -12,8 +12,8 @@ public class SkillControler : MonoBehaviour
     [SerializeField] private int nRune;
     private int skillIndex;
 
-    [SerializeField] private GameObject skill;
-    [SerializeField] private Transform ss; //ShotSkill
+    private Skill skill;
+    //[SerializeField] private Transform ss; //ShotSkill
     [SerializeField] private float skillVelocity;
     private InputManager input;
 
@@ -95,9 +95,9 @@ public class SkillControler : MonoBehaviour
             skill = SkillList.getSkillByIndex(test);
             if(skill != null)
             {
-                GameObject temp = Instantiate(skill, transform);
-                temp.transform.position = ss.position;
-                temp.GetComponent<Rigidbody2D>().velocity = new Vector2(skillVelocity, 0);
+                GameObject temp = Instantiate(skill.skillObject, transform);
+                temp.transform.position = (Vector2)transform.position + skill.startingPosition;
+                temp.GetComponent<Rigidbody2D>().velocity = skill.shotDirection;
             }
         }
     }

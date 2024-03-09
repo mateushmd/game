@@ -11,7 +11,7 @@ public class SkillList : MonoBehaviour
     void Awake()
     {
         fireBall = Resources.Load<GameObject>("FireBall");
-        skillList.Add(new Skill(15553, fireBall));
+        skillList.Add(new Skill(15553, fireBall, new Vector2(1, 0), new Vector2(10, 0)));
     }
 
     // Update is called once per frame
@@ -19,27 +19,15 @@ public class SkillList : MonoBehaviour
     {
     }
 
-    public static GameObject getSkillByIndex(int index)
+    public static Skill getSkillByIndex(int index)
     {
         foreach(Skill sk in skillList){
             if (sk.index == index)
             {
-                return sk.skillObject;
+                return sk;
             }
         }
 
         return null;
-    }
-}
-
-class Skill
-{
-    public int index { get; private set; }
-    public GameObject skillObject { get; private set; }
-
-    public Skill(int i, GameObject so)
-    {
-        index = i;
-        skillObject = so;
     }
 }
