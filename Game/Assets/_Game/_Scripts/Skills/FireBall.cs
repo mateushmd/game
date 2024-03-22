@@ -1,13 +1,13 @@
 using System;
 using _Game._Scripts.Damage;
+using _Game._Scripts.Utilities;
 using UnityEngine;
 
 namespace _Game._Scripts.Skills
 {
     public class FireBall : TriggerDamagePlayer
     {
-
-        void Awake()
+        new void Awake()
         {
             baseDamage = 100;
             damageOnInt = 50;
@@ -23,6 +23,7 @@ namespace _Game._Scripts.Skills
             if(damageable != null && collision.CompareTag("Enemy"))
             {
                 damageable.TakeDamage(totalDamage);
+                collision.GetComponent<Stats>().buffAgility("fireball", -4, 1.5f);
                 if (destroyOnHit)
                     Destroy(gameObject);
             }

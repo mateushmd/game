@@ -13,7 +13,6 @@ namespace _Game._Scripts.Damage
         protected float baseDamage = 0;
         protected float damageOnForce = 0;
         protected float damageOnInt = 0;
-        protected float duration;
         protected bool destroyOnHit = true;
         protected float totalDamage = 0;
         private Stats stats;

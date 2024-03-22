@@ -9,12 +9,11 @@ using UnityEngine.InputSystem;
 
 public class SkillControler : MonoBehaviour
 {
-    private int[] runes = new int[5]; //
+    private int[] runes = new int[3]; //
     [SerializeField] private int nRune;
     private int skillIndex;
 
     private Skill skill;
-    //[SerializeField] private Transform ss; //ShotSkill
     [SerializeField] private float skillVelocity;
     private InputManager input;
 
@@ -91,7 +90,7 @@ public class SkillControler : MonoBehaviour
 
     private void testForSkill()
     {
-        if (nRune == 5)
+        if (nRune == 3)
         {
             int test = getSkillIndex();
             Debug.Log(test);

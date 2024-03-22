@@ -7,7 +7,6 @@ public class Skill
     public int index { get; private set; }
     public GameObject skillObject { get; private set; }
     public Vector2 startingPosition { get; private set; }
-    //public Vector2 shotDirection { get; private set; }
     public ESightType sight { get; private set; }
     public Vector2 range { get; private set; }
 
@@ -16,7 +15,6 @@ public class Skill
         index = i;
         skillObject = so;
         startingPosition = sp;
-        //shotDirection = new Vector2(1, 0);
         sight = ESightType.Targeted;
     }
     
@@ -25,7 +23,6 @@ public class Skill
         index = i;
         skillObject = so;
         startingPosition = sp;
-        //shotDirection = sd;
         sight = ESightType.Targeted;
     }
 
@@ -34,7 +31,6 @@ public class Skill
         index = i;
         skillObject = so;
         startingPosition = new Vector2();
-        //shotDirection = new Vector2();
         this.sight = sight;
     }
     
@@ -43,7 +39,6 @@ public class Skill
         index = i;
         skillObject = so;
         startingPosition = new Vector2();
-        //shotDirection = new Vector2();
         this.sight = sight;
         this.range = range;
     }
