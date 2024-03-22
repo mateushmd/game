@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using _Game._Scripts.Player;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,6 +17,8 @@ public class SkillControler : MonoBehaviour
     //[SerializeField] private Transform ss; //ShotSkill
     [SerializeField] private float skillVelocity;
     private InputManager input;
+
+    [SerializeField] private LayerMask enemyLayer;
 
     void Awake()
     {
@@ -96,8 +99,20 @@ public class SkillControler : MonoBehaviour
             if(skill != null)
             {
                 GameObject temp = Instantiate(skill.skillObject, transform);
-                temp.transform.position = (Vector2)transform.position + skill.startingPosition;
-                temp.GetComponent<Rigidbody2D>().velocity = skill.shotDirection;
+                if (skill.sight == ESightType.Targeted)
+                {
+                    temp.transform.position = (Vector2)transform.position + skill.startingPosition;
+                }
+                else if (skill.sight == ESightType.Enemy)
+                {
+                    Collider2D coll = Physics2D.OverlapBox(transform.position, skill.range, 0f, enemyLayer);
+                    if (coll != null)
+                        temp.transform.position = coll.transform.position;
+                }
+                else if (skill.sight == ESightType.Player)
+                {
+                    temp.transform.position = transform.position;
+                }
             }
         }
     }

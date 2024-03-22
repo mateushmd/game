@@ -3,25 +3,27 @@ using _Game._Scripts.Utilities;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using Stats = _Game._Scripts.Utilities.Stats;
+using Base = _Game._Scripts.Skills.Base;
 
 namespace _Game._Scripts.Damage
 {
-    public class TriggerDamage : MonoBehaviour
+    public class TriggerDamagePlayer : MonoBehaviour
     {
         //Em porcentagem
-        [SerializeField] private float damageOnForce;
-        [SerializeField] private float damageOnInt;
-        [SerializeField] private float duration;
-        [SerializeField] private bool destroyOnHit;
-        private float totalDamage = 0;
+        protected float baseDamage = 0;
+        protected float damageOnForce = 0;
+        protected float damageOnInt = 0;
+        protected float duration;
+        protected bool destroyOnHit = true;
+        protected float totalDamage = 0;
         private Stats stats;
         
-        private void Awake()
+        protected void Awake()
         {
             stats = GetComponentInParent<Stats>();
-            damageOnForce *= stats.getForce();
-            damageOnInt *= stats.getInteligence();
-            totalDamage = damageOnInt + damageOnForce;
+            damageOnForce = damageOnForce * stats.getForce() / 100;
+            damageOnInt = damageOnInt * stats.getInteligence() / 100;
+            totalDamage = baseDamage + damageOnInt + damageOnForce;
         }
 
         private void Update()
@@ -31,7 +33,7 @@ namespace _Game._Scripts.Damage
         private void OnTriggerEnter2D(Collider2D collision)
         {
             Damageable damageable = collision.GetComponent<Damageable>();
-            if(damageable != null)
+            if(damageable != null && collision.CompareTag("Enemy"))
             {
                 damageable.TakeDamage(totalDamage);
                 if (destroyOnHit)

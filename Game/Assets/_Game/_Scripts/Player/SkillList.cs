@@ -11,7 +11,7 @@ public class SkillList : MonoBehaviour
     void Awake()
     {
         fireBall = Resources.Load<GameObject>("FireBall");
-        skillList.Add(new Skill(15553, fireBall, new Vector2(1, 0), new Vector2(10, 0)));
+        skillList.Add(new Skill(15553, fireBall, new Vector2(1, 0)));
     }
 
     // Update is called once per frame
