@@ -260,7 +260,7 @@ PrefabInstance:
     - target: {fileID: 7233330124088316335, guid: 217cb95b40cd1bc4f9d973fcdfe9aec9, type: 3}
       propertyPath: ss
       value: 
-      objectReference: {fileID: 440184746}
+      objectReference: {fileID: 0}
     - target: {fileID: 7233330124088316335, guid: 217cb95b40cd1bc4f9d973fcdfe9aec9, type: 3}
       propertyPath: skillVelocity
       value: 10
@@ -473,11 +473,6 @@ MonoBehaviour:
   playerTransform: {fileID: 1003084855}
   offSet: {x: 0, y: 3.5, z: 0}
   smoothTime: 5
---- !u!4 &440184746 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2998362074282693525, guid: 217cb95b40cd1bc4f9d973fcdfe9aec9, type: 3}
-  m_PrefabInstance: {fileID: 195038246}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1003084855 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8097234193942473044, guid: 217cb95b40cd1bc4f9d973fcdfe9aec9, type: 3}

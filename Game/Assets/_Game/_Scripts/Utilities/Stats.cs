@@ -183,6 +183,19 @@ namespace _Game._Scripts.Utilities
             return st;
         }
 
+        public State getStateByName(string name)
+        {
+            foreach (State st in buffs)
+            {
+                if (st.name.Equals(name))
+                {
+                    return st;
+                }
+            }
+
+            return null;
+        }
+
         public float getHP()
         {
             return HP;
@@ -218,7 +231,6 @@ namespace _Game._Scripts.Utilities
             return dexterity;
         }
 
-
         public int getAgility()
         {
             return agility;
@@ -227,29 +239,6 @@ namespace _Game._Scripts.Utilities
         public int getDefense()
         {
             return defense;
-        }
-
-        public class State
-        {
-            private Cooldown cooldown = new Cooldown();
-            public string name;
-            public int statID;
-            public int value;
-
-            public State(int statID, string name, int value, float time)
-            {
-                this.statID = statID;
-                this.name = name;
-                this.value = value;
-
-                this.cooldown.setTime(time);
-                this.cooldown.StartCooldown();
-            }
-
-            public bool timeEnd()
-            {
-                return !cooldown.isCoolingDown;
-            }
         }
     }
 }

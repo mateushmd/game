@@ -19,9 +19,12 @@ public class SkillControler : MonoBehaviour
 
     [SerializeField] private LayerMask enemyLayer;
 
+    private Equipment equipment;
+
     void Awake()
     {
         nRune = 0;
+        equipment = GetComponent<Equipment>();
         
         input = InputManager.Instance;
     }
@@ -46,6 +49,7 @@ public class SkillControler : MonoBehaviour
         input.skill3.performed += rune3;
         input.skill4.performed += rune4;
         input.skill5.performed += rune5;
+        input.attack.performed += attack;
     }
 
     private void rune1(InputAction.CallbackContext context)
@@ -83,6 +87,12 @@ public class SkillControler : MonoBehaviour
         testForSkill();
     }
 
+    private void attack(InputAction.CallbackContext context)
+    {
+        GameObject temp = Instantiate(Resources.Load<GameObject>(equipment.arma + "Attack"), transform);
+        temp.transform.position = (Vector2)transform.position + new Vector2(1.1f, 0);
+    }
+
     private void comb(int rune)
     {
         runes[nRune] = rune;
@@ -97,20 +107,29 @@ public class SkillControler : MonoBehaviour
             skill = SkillList.getSkillByIndex(test);
             if(skill != null)
             {
-                GameObject temp = Instantiate(skill.skillObject, transform);
-                if (skill.sight == ESightType.Targeted)
+                if (!skill.cooldown.isCoolingDown)
                 {
-                    temp.transform.position = (Vector2)transform.position + skill.startingPosition;
-                }
-                else if (skill.sight == ESightType.Enemy)
+                    GameObject temp = Instantiate(skill.skillObject, transform);
+                    if (skill.sight == ESightType.Targeted)
+                    {
+                        temp.transform.position = (Vector2)transform.position + skill.startingPosition;
+                    }
+                    else if (skill.sight == ESightType.Enemy)
+                    {
+                        Collider2D coll = Physics2D.OverlapBox(transform.position, skill.range, 0f, enemyLayer);
+                        if (coll != null)
+                            temp.transform.position = coll.transform.position;
+                    }
+                    else if (skill.sight == ESightType.Player)
+                    {
+                        temp.transform.position = transform.position;
+                    }
+                    
+                    skill.cooldown.setTime(skill.cooldownTime);
+                    skill.cooldown.StartCooldown();
+                } else
                 {
-                    Collider2D coll = Physics2D.OverlapBox(transform.position, skill.range, 0f, enemyLayer);
-                    if (coll != null)
-                        temp.transform.position = coll.transform.position;
-                }
-                else if (skill.sight == ESightType.Player)
-                {
-                    temp.transform.position = transform.position;
+                    Debug.Log("Está em recarga");
                 }
             }
         }

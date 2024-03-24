@@ -12,6 +12,7 @@ namespace _Game._Scripts.Player
         public InputAction skill3 {get; private set;}
         public InputAction skill4 {get; private set;}
         public InputAction skill5 {get; private set;}
+        public InputAction attack { get; private set; }
 
         protected override void Awake()
         {
@@ -41,6 +42,9 @@ namespace _Game._Scripts.Player
 
             skill5 = playerInputActions.Player.Skill5;
             skill5.Enable();
+
+            attack = playerInputActions.Player.Attack;
+            attack.Enable();
         }
 
         private void OnDisable()
@@ -52,6 +56,7 @@ namespace _Game._Scripts.Player
             skill3.Disable();
             skill4.Disable();
             skill5.Disable();
+            attack.Disable();
         }
     }
 }
