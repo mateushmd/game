@@ -9,12 +9,10 @@ namespace _Game._Scripts.Damage
 {
     public class TriggerDamagePlayer : MonoBehaviour
     {
-        //Em porcentagem
         protected float baseDamage = 0;
         protected float damageOnForce = 0;
         protected float damageOnInt = 0;
         protected bool destroyOnHit = true;
-        protected bool followPlayer = false;
         protected float totalDamage = 0;
         protected Vector2 initialPosition;
         private Stats stats;
@@ -26,15 +24,6 @@ namespace _Game._Scripts.Damage
             damageOnInt = damageOnInt * stats.getInteligence() / 100;
             totalDamage = baseDamage + damageOnInt + damageOnForce;
             initialPosition = transform.position;
-            Debug.Log(initialPosition);
-        }
-
-        protected void FixefUpdate()
-        {
-            if (followPlayer)
-            {
-                transform.position = initialPosition;
-            }
         }
 
         private void OnTriggerEnter2D(Collider2D collision)

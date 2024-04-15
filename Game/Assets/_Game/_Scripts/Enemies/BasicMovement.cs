@@ -65,10 +65,12 @@ namespace _Game._Scripts.Enemies
                 Vector2 position = transform.position;
                 Vector2 playerPosition = coll.transform.position;
                 Vector2 direction = playerPosition - position;
-                RaycastHit2D hit = Physics2D.Raycast(position, direction.normalized);
-                if (hit.transform != null)
+                RaycastHit2D[] hit = Physics2D.RaycastAll(position, direction.normalized);
+                RaycastHit2D target = hit[1];
+                if (target.transform != null)
                 {
-                    if (hit.transform.CompareTag("Player"))
+                    Debug.Log(target.transform.name);
+                    if (target.transform.CompareTag("Player"))
                     {
                         seePlayer = true;
                     }

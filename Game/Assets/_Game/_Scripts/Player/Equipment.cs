@@ -8,7 +8,7 @@ public class Equipment : MonoBehaviour
     
     void Start()
     {
-        arma = "Staff";
+        arma = "Dagger";
     }
 
     // Update is called once per frame

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6637852431323073194}
   - component: {fileID: 8902528866523524223}
   - component: {fileID: 929493095997165287}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: StaffAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}

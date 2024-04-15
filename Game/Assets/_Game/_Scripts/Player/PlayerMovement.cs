@@ -64,7 +64,7 @@ namespace _Game._Scripts.Player
         {
             canJump = false;
             
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheckTransform.position, .02f, groundLayer);
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheckTransform.position, 0.5f, groundLayer);
             
             foreach (Collider2D col in colliders)
             {

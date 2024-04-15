@@ -1,17 +1,17 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using _Game._Scripts.Damage;
 using UnityEngine;
 
-public class SwordAttack : TriggerDamagePlayer
+public class DaggerAttack : TriggerDamagePlayer
 {
-    private Cooldown time = new Cooldown(); 
+    private Cooldown time = new Cooldown();
 
     private new void Awake()
     {
-        baseDamage = 50;
-        damageOnForce = 15;
+        Debug.Log(followPlayer);
+        baseDamage = 25;
+        damageOnForce = 7.5f;
 
         destroyOnHit = false;
         
@@ -19,6 +19,7 @@ public class SwordAttack : TriggerDamagePlayer
         
         time.setTime(0.5f);
         time.StartCooldown();
+        Debug.Log(followPlayer);
     }
 
     private void Update()
