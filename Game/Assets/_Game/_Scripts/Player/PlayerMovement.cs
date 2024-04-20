@@ -32,6 +32,8 @@ namespace _Game._Scripts.Player
 
         private InputManager input;
         
+        public bool right { get; private set; }
+        
         private void Awake()
         {
             rigidBody = GetComponent<Rigidbody2D>();
@@ -39,12 +41,15 @@ namespace _Game._Scripts.Player
             groundCheckTransform = transform.GetChild(1).GetComponent<Transform>();
             
             input = InputManager.Instance;
+
+            right = true;
         }
 
         private void FixedUpdate()
         {
             GroundCheck();
             Move();
+            DirectionCheck();
         }
 
         // Update is called once per frame
@@ -58,6 +63,21 @@ namespace _Game._Scripts.Player
             Vector3 targetVelocity = new Vector2(axis * speed, rigidBody.velocity.y);
 
             rigidBody.velocity = Vector3.SmoothDamp(rigidBody.velocity, targetVelocity, ref velocity, movementSmoothing);
+        }
+
+        private void DirectionCheck()
+        {
+            switch (axis)
+            {
+                case -1:
+                    transform.eulerAngles = new Vector3(0, 180, 0);
+                    right = false;
+                    break;
+                case 1:
+                    transform.eulerAngles = new Vector3(0, 0, 0);
+                    right = true;
+                    break;
+            }
         }
 
         private void GroundCheck()

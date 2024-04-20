@@ -1,4 +1,5 @@
 using System;
+using _Game._Scripts.Player;
 using _Game._Scripts.Utilities;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
@@ -9,17 +10,19 @@ namespace _Game._Scripts.Damage
 {
     public class TriggerDamagePlayer : MonoBehaviour
     {
+        protected Stats stats;
+        protected PlayerMovement mov;
         protected float baseDamage = 0;
         protected float damageOnForce = 0;
         protected float damageOnInt = 0;
         protected bool destroyOnHit = true;
         protected float totalDamage = 0;
         protected Vector2 initialPosition;
-        private Stats stats;
         
         protected void Awake()
         {
             stats = GetComponentInParent<Stats>();
+            mov = GetComponentInParent<PlayerMovement>();
             damageOnForce = damageOnForce * stats.getForce() / 100;
             damageOnInt = damageOnInt * stats.getInteligence() / 100;
             totalDamage = baseDamage + damageOnInt + damageOnForce;

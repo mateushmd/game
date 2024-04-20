@@ -9,7 +9,6 @@ public class DaggerAttack : TriggerDamagePlayer
 
     private new void Awake()
     {
-        Debug.Log(followPlayer);
         baseDamage = 25;
         damageOnForce = 7.5f;
 
@@ -19,7 +18,6 @@ public class DaggerAttack : TriggerDamagePlayer
         
         time.setTime(0.5f);
         time.StartCooldown();
-        Debug.Log(followPlayer);
     }
 
     private void Update()

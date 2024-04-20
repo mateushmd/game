@@ -1,5 +1,6 @@
 using System;
 using _Game._Scripts.Damage;
+using _Game._Scripts.Player;
 using _Game._Scripts.Utilities;
 using UnityEngine;
 
@@ -13,8 +14,11 @@ namespace _Game._Scripts.Skills
             damageOnInt = 50;
 
             base.Awake();
-
-            GetComponent<Rigidbody2D>().velocity = new Vector2(5.2f, 0);
+            
+            if(mov.right)
+                GetComponent<Rigidbody2D>().velocity = new Vector2(5.2f, 0);
+            else
+                GetComponent<Rigidbody2D>().velocity = new Vector2(-5.2f, 0);
         }
         
         private void OnTriggerEnter2D(Collider2D collision)

@@ -21,10 +21,13 @@ public class SkillControler : MonoBehaviour
 
     private Equipment equipment;
 
+    private PlayerMovement mov;
+
     void Awake()
     {
         nRune = 0;
         equipment = GetComponent<Equipment>();
+        mov = GetComponent<PlayerMovement>();
         
         input = InputManager.Instance;
     }
@@ -112,7 +115,14 @@ public class SkillControler : MonoBehaviour
                     GameObject temp = Instantiate(skill.skillObject, transform);
                     if (skill.sight == ESightType.Targeted)
                     {
-                        temp.transform.position = (Vector2)transform.position + skill.startingPosition;
+                        if (mov.right)
+                        {
+                            temp.transform.position = (Vector2)transform.position + skill.startingPosition;
+                        }
+                        else
+                        {
+                            temp.transform.position = (Vector2)transform.position - skill.startingPosition;
+                        }
                     }
                     else if (skill.sight == ESightType.Enemy)
                     {
