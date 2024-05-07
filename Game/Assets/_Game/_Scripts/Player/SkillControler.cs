@@ -93,7 +93,14 @@ public class SkillControler : MonoBehaviour
     private void attack(InputAction.CallbackContext context)
     {
         GameObject temp = Instantiate(Resources.Load<GameObject>(equipment.arma + "Attack"), transform);
-        temp.transform.position = (Vector2)transform.position + new Vector2(1.1f, 0);
+        if (mov.right)
+        {
+            temp.transform.position = (Vector2)transform.position + new Vector2(1.1f, 0);
+        }
+        else
+        {
+            temp.transform.position = (Vector2)transform.position - new Vector2(1.1f, 0);
+        }
     }
 
     private void comb(int rune)

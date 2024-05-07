@@ -70,11 +70,9 @@ namespace _Game._Scripts.Player
             switch (axis)
             {
                 case -1:
-                    transform.eulerAngles = new Vector3(0, 180, 0);
                     right = false;
                     break;
                 case 1:
-                    transform.eulerAngles = new Vector3(0, 0, 0);
                     right = true;
                     break;
             }
