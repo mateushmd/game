@@ -12,20 +12,18 @@ namespace _Game._Scripts.Damage
     {
         protected Stats stats;
         protected PlayerMovement mov;
-        protected float baseDamage = 0;
         protected float damageOnForce = 0;
         protected float damageOnInt = 0;
         protected bool destroyOnHit = true;
-        protected float totalDamage = 0;
         protected Vector2 initialPosition;
+        protected EElement element = EElement.Neutro;
         
         protected void Awake()
         {
             stats = GetComponentInParent<Stats>();
             mov = GetComponentInParent<PlayerMovement>();
-            damageOnForce = damageOnForce * stats.getForce() / 100;
-            damageOnInt = damageOnInt * stats.getInteligence() / 100;
-            totalDamage = baseDamage + damageOnInt + damageOnForce;
+            damageOnForce = damageOnForce * stats.force / 100;
+            damageOnInt = damageOnInt * stats.inteligence / 100;
             initialPosition = transform.position;
         }
 
@@ -34,7 +32,25 @@ namespace _Game._Scripts.Damage
             Damageable damageable = collision.GetComponent<Damageable>();
             if(damageable != null && collision.CompareTag("Enemy"))
             {
-                damageable.TakeDamage(totalDamage);
+                int bonus = 0;
+                
+                switch (element)
+                {
+                    case EElement.Ar:
+                        bonus = (stats.windBonus + 100) / 100;
+                        break;
+                    case EElement.Agua:
+                        bonus = (stats.waterBonus + 100) / 100;
+                        break;
+                    case EElement.Terra:
+                        bonus = (stats.earthBonus + 100) / 100;
+                        break;
+                    case EElement.Fogo:
+                        bonus = (stats.fireBonus + 100) / 100;
+                        break;
+                }
+                
+                damageable.TakeDamage(damageOnForce, damageOnInt, element, bonus);
                 if (destroyOnHit)
                     Destroy(gameObject);
             }

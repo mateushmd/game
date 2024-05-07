@@ -10,8 +10,8 @@ namespace _Game._Scripts.Skills
     {
         new void Awake()
         {
-            baseDamage = 100;
-            damageOnInt = 50;
+            element = EElement.Fogo;
+            damageOnInt = 150;
 
             base.Awake();
             

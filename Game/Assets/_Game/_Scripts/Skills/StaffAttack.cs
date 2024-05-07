@@ -7,8 +7,7 @@ public class StaffAttack : TriggerDamagePlayer
 {
     new void Awake()
     {
-        baseDamage = 50;
-        damageOnInt = 15;
+        damageOnInt = 65;
 
         base.Awake();
 

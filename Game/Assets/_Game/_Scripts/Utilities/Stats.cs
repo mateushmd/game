@@ -7,17 +7,28 @@ namespace _Game._Scripts.Utilities
     [RequireComponent(typeof(Damageable))]
     public class Stats : MonoBehaviour
     {
-        [Header("Attributes")] 
-        [SerializeField] private float HP;
-        [SerializeField] private float MP;
-        [SerializeField] private float maxHP; //statID 1
-        [SerializeField] private float maxMP; //statID 2
-        [SerializeField] private int inteligence; //statID 3
-        [SerializeField] private int force; //statID 4
-        [SerializeField] private int dexterity; //statID 5
-        [SerializeField] private int agility; //statID 6
-        [SerializeField] private int defense; //statID 7
-
+        //Stats base
+        public float HP { get; private set;  }
+        public float MP { get; private set; }
+        public float maxHP { get; private set; } //statID 1
+        public float maxMP { get; private set; } //statID 2
+        public int inteligence { get; private set; } //statID 3
+        public int force { get; private set; } //statID 4
+        public int dexterity { get; private set; } //statID 5
+        public int agility { get; private set; } //statID 6
+        public int defense { get; private set; } //statID 7
+        public int magicDefense { get; private set; }
+        
+        //Stats %
+        public int windResistence { get; private set; }
+        public int waterResistence { get; private set; }
+        public int earthResistence { get; private set; }
+        public int fireResistence { get; private set; }
+        public int windBonus { get; private set; }
+        public int waterBonus { get; private set; }
+        public int earthBonus { get; private set; }
+        public int fireBonus { get; private set; }
+        
         [Header("(De)buffs")] 
         private List<State> buffs = new List<State>();
 
@@ -194,51 +205,6 @@ namespace _Game._Scripts.Utilities
             }
 
             return null;
-        }
-
-        public float getHP()
-        {
-            return HP;
-        }
-
-        public float getMP()
-        {
-            return MP;
-        }
-
-        public float getMaxHP()
-        {
-            return maxHP;
-        }
-
-        public float getMaxMP()
-        {
-            return maxMP;
-        }
-
-        public int getInteligence()
-        {
-            return inteligence;
-        }
-
-        public int getForce()
-        {
-            return force;
-        }
-
-        public int getDexterity()
-        {
-            return dexterity;
-        }
-
-        public int getAgility()
-        {
-            return agility;
-        }
-
-        public int getDefense()
-        {
-            return defense;
         }
     }
 }

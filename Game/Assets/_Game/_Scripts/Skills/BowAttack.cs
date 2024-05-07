@@ -7,7 +7,7 @@ public class BowAttack : TriggerDamagePlayer
 {
     new void Awake()
     {
-        baseDamage = 50;
+        damageOnForce = 50;
 
         base.Awake();
 

@@ -10,8 +10,7 @@ public class SwordAttack : TriggerDamagePlayer
 
     private new void Awake()
     {
-        baseDamage = 50;
-        damageOnForce = 15;
+        damageOnForce = 65;
 
         destroyOnHit = false;
         

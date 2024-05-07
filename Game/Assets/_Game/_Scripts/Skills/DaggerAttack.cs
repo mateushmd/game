@@ -9,8 +9,7 @@ public class DaggerAttack : TriggerDamagePlayer
 
     private new void Awake()
     {
-        baseDamage = 25;
-        damageOnForce = 7.5f;
+        damageOnForce = 32.5f;
 
         destroyOnHit = false;
         
