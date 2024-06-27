@@ -5,9 +5,9 @@ namespace _Game._Scripts.Utilities
         private Cooldown cooldown = new Cooldown();
         public string name { get; }
         public int statID { get; }
-        public int value { get; }
+        public double value { get; }
 
-        public State(int statID, string name, int value, float time)
+        public State(int statID, string name, double value, float time)
         {
             this.statID = statID;
             this.name = name;

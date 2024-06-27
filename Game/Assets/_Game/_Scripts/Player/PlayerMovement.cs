@@ -14,6 +14,8 @@ namespace _Game._Scripts.Player
     {
         private Rigidbody2D rigidBody;
 
+        private Transform sprite;
+
         private float axis = 0;
 
         [SerializeField] private float speed = 10f;
@@ -38,6 +40,8 @@ namespace _Game._Scripts.Player
         {
             rigidBody = GetComponent<Rigidbody2D>();
 
+            sprite = transform.GetChild(0).GetComponent<Transform>();
+            
             groundCheckTransform = transform.GetChild(1).GetComponent<Transform>();
             
             input = InputManager.Instance;
@@ -70,9 +74,11 @@ namespace _Game._Scripts.Player
             switch (axis)
             {
                 case -1:
+                    sprite.eulerAngles = new Vector3(0, 180, 0);
                     right = false;
                     break;
                 case 1:
+                    sprite.eulerAngles = new Vector3(0, 0, 0);
                     right = true;
                     break;
             }

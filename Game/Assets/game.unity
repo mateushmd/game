@@ -265,9 +265,37 @@ PrefabInstance:
       propertyPath: skillVelocity
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 8097234193883434387, guid: 217cb95b40cd1bc4f9d973fcdfe9aec9, type: 3}
+      propertyPath: m_Size.x
+      value: 2.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 8097234193883434387, guid: 217cb95b40cd1bc4f9d973fcdfe9aec9, type: 3}
+      propertyPath: m_Size.y
+      value: 2.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 8097234193883434387, guid: 217cb95b40cd1bc4f9d973fcdfe9aec9, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+    - target: {fileID: 8097234193883434387, guid: 217cb95b40cd1bc4f9d973fcdfe9aec9, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8097234193942473040, guid: 217cb95b40cd1bc4f9d973fcdfe9aec9, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8097234193942473040, guid: 217cb95b40cd1bc4f9d973fcdfe9aec9, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8097234193942473042, guid: 217cb95b40cd1bc4f9d973fcdfe9aec9, type: 3}
+      propertyPath: m_Size.y
+      value: 1.0101519
+      objectReference: {fileID: 0}
+    - target: {fileID: 8097234193942473042, guid: 217cb95b40cd1bc4f9d973fcdfe9aec9, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.0016710758
       objectReference: {fileID: 0}
     - target: {fileID: 8097234193942473043, guid: 217cb95b40cd1bc4f9d973fcdfe9aec9, type: 3}
       propertyPath: groundLayer.m_Bits
@@ -513,9 +541,17 @@ PrefabInstance:
       propertyPath: rangeVision.y
       value: 2.12
       objectReference: {fileID: 0}
+    - target: {fileID: 2533721364679985073, guid: 66b1edec75094e7468aa2cb1b3680925, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 2567240501356664230, guid: 66b1edec75094e7468aa2cb1b3680925, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4488825427765963512, guid: 66b1edec75094e7468aa2cb1b3680925, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 4648124770697419700, guid: 66b1edec75094e7468aa2cb1b3680925, type: 3}
       propertyPath: m_RootOrder
@@ -561,6 +597,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4651771591908124896, guid: 66b1edec75094e7468aa2cb1b3680925, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 4905382715210297792, guid: 66b1edec75094e7468aa2cb1b3680925, type: 3}
       propertyPath: m_Radius
       value: 0.5163928

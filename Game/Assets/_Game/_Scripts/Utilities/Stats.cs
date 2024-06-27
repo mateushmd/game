@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using _Game._Scripts.Damage;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace _Game._Scripts.Utilities
@@ -17,7 +18,7 @@ namespace _Game._Scripts.Utilities
         public int dexterity { get; private set; } //statID 5
         public int agility { get; private set; } //statID 6
         public int defense { get; private set; } //statID 7
-        public int magicDefense { get; private set; }
+        public int magicDefense { get; private set; } //statID 8
         
         //Stats %
         public int windResistence { get; private set; }
@@ -68,14 +69,14 @@ namespace _Game._Scripts.Utilities
             return true; //Permitir ação com uso de MP
         }
 
-        public void buffMaxHP(string name, int value, float time)
+        public void buffMaxHP(string name, float value, float time)
         {
             if (time != 0)
                 buffs.Add(new State(1, name, value, time));
             maxHP += value;
         }
 
-        public void buffMaxMP(string name, int value, float time)
+        public void buffMaxMP(string name, float value, float time)
         {
             if (time != 0)
                 buffs.Add(new State(2, name, value, time));
@@ -116,6 +117,69 @@ namespace _Game._Scripts.Utilities
                 buffs.Add(new State(7, name, value, time));
             defense += value;
         }
+        
+        public void buffMagicDefense(string nome, int value, float time)
+        {
+            if (time != 0)
+                buffs.Add(new State(8, name, value, time));
+            magicDefense += value;
+        }
+
+        public void buffWindResistence(string nome, int value, float time)
+        {
+            if(time != 0)
+                buffs.Add(new State(9, name, value, time));
+            windResistence += value;
+        }
+        
+        public void buffWaterResistence(string nome, int value, float time)
+        {
+            if(time != 0)
+                buffs.Add(new State(10, name, value, time));
+            waterResistence += value;
+        }
+        
+        public void buffEarthResistence(string nome, int value, float time)
+        {
+            if(time != 0)
+                buffs.Add(new State(11, name, value, time));
+            earthResistence += value;
+        }
+        
+        public void buffFireResistence(string nome, int value, float time)
+        {
+            if(time != 0)
+                buffs.Add(new State(12, name, value, time));
+            fireResistence += value;
+        }
+        
+        public void buffWindBonus(string nome, int value, float time)
+        {
+            if(time != 0)
+                buffs.Add(new State(13, name, value, time));
+            windBonus += value;
+        }
+        
+        public void buffWaterBonus(string nome, int value, float time)
+        {
+            if(time != 0)
+                buffs.Add(new State(14, name, value, time));
+            waterBonus += value;
+        }
+        
+        public void buffEarthBonus(string nome, int value, float time)
+        {
+            if(time != 0)
+                buffs.Add(new State(15, name, value, time));
+            earthBonus += value;
+        }
+        
+        public void buffFireBonus(string nome, int value, float time)
+        {
+            if(time != 0)
+                buffs.Add(new State(16, name, value, time));
+            fireBonus += value;
+        }
 
         private void Awake()
         {
@@ -137,30 +201,57 @@ namespace _Game._Scripts.Utilities
             }
         }
 
-        private void adjust(int statID, int value)
+        private void adjust(int statID, double value)
         {
             switch (statID)
             {
                 case 1:
-                    maxHP -= value;
+                    maxHP -= (float)value;
                     break;
                 case 2:
-                    maxMP -= value;
+                    maxMP -= (float)value;
                     break;
                 case 3:
-                    inteligence -= value;
+                    inteligence -= (int)value;
                     break;
                 case 4:
-                    force -= value;
+                    force -= (int)value;
                     break;
                 case 5:
-                    dexterity -= value;
+                    dexterity -= (int)value;
                     break;
                 case 6:
-                    agility -= value;
+                    agility -= (int)value;
                     break;
                 case 7:
-                    defense -= value;
+                    defense -= (int)value;
+                    break;
+                case 8:
+                    magicDefense -= (int)value;
+                    break;
+                case 9:
+                    windResistence -= (int)value;
+                    break;
+                case 10:
+                    waterResistence -= (int)value;
+                    break;
+                case 11:
+                    earthResistence -= (int)value;
+                    break;
+                case 12:
+                    fireResistence -= (int)value;
+                    break;
+                case 13:
+                    windBonus -= (int)value;
+                    break;
+                case 14:
+                    waterBonus -= (int)value;
+                    break;
+                case 15:
+                    earthBonus -= (int)value;
+                    break;
+                case 16:
+                    fireBonus -= (int)value;
                     break;
             }
         }
@@ -175,7 +266,7 @@ namespace _Game._Scripts.Utilities
             List<State> st = new List<State>();
             foreach (State str in buffs)
             {
-                if (str.value > 0)
+                if (str.value > 0 && !str.name.Equals(""))
                     st.Add(str);
             }
 
@@ -187,7 +278,7 @@ namespace _Game._Scripts.Utilities
             List<State> st = new List<State>();
             foreach (State str in buffs)
             {
-                if (str.value < 0)
+                if (str.value < 0 && !str.name.Equals(""))
                     st.Add(str);
             }
 

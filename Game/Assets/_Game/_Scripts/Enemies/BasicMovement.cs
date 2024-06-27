@@ -10,21 +10,23 @@ namespace _Game._Scripts.Enemies
         private Rigidbody2D rig;
 
         [Header("Vision")] [SerializeField] private Vector2 rangeVision = new Vector2(4, 3);
-        private float distance = 1;
 
         [Header("Movimento")] [SerializeField] private float speed = 0.03f;
         [SerializeField] private float atkDistance;
 
         [Header("Components")] [SerializeField]
         private Transform groundCheck;
+        private Transform obstacleCheck;
 
         [SerializeField] private Transform player;
         [SerializeField] private Stats stats;
         [SerializeField] private LayerMask playerlayer;
+        [SerializeField] private LayerMask groundLayer;
 
         [Header("Tests")] private bool isRight = true;
         [SerializeField] private bool seePlayer = false;
         private bool onBord = false;
+        private bool onObstacle = false;
 
         // Start is called before the first frame update
         void Start()
@@ -32,6 +34,7 @@ namespace _Game._Scripts.Enemies
             rig = GetComponent<Rigidbody2D>();
             stats = GetComponent<Stats>();
             groundCheck = transform.GetChild(0).GetComponent<Transform>();
+            obstacleCheck = transform.GetChild(1).GetComponent<Transform>();
         }
 
         private void FixedUpdate()
@@ -46,6 +49,8 @@ namespace _Game._Scripts.Enemies
         void Update()
         {
             DetectBorder();
+
+            DetectObstacles();
 
             FindPlayer();
         }
@@ -92,7 +97,7 @@ namespace _Game._Scripts.Enemies
 
         private void DetectBorder()
         {
-            RaycastHit2D ground = Physics2D.Raycast(groundCheck.position, Vector2.down, distance);
+            RaycastHit2D ground = Physics2D.Raycast(groundCheck.position, Vector2.down, 1, groundLayer);
 
             if (!ground.collider)
             {
@@ -104,17 +109,37 @@ namespace _Game._Scripts.Enemies
             }
         }
 
+        private void DetectObstacles()
+        {
+            Vector2 vc;
+            if (isRight)
+                vc = Vector2.right;
+            else
+                vc = Vector2.left;
+            RaycastHit2D obstacle = Physics2D.Raycast(obstacleCheck.position, vc, 0.4f, groundLayer);
+
+            if (obstacle.collider)
+                onObstacle = true;
+            else
+                onObstacle = false;
+        }
+
         private void Movement()
         {
             transform.Translate(Vector2.right * speed);
-            if (onBord)
+            if (onBord || onObstacle)
             {
-                isRight = !isRight;
-                if (isRight)
-                    transform.eulerAngles = new Vector3(0, 0, 0);
-                else
-                    transform.eulerAngles = new Vector3(0, 180, 0);
+                Spin();
             }
+        }
+
+        private void Spin()
+        {
+            isRight = !isRight;
+            if (isRight)
+                transform.eulerAngles = new Vector3(0, 0, 0);
+            else
+                transform.eulerAngles = new Vector3(0, 180, 0);
         }
 
         private void FollowPLayer()

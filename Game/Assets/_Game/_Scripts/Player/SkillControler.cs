@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _Game._Scripts.Player;
+using _Game._Scripts.Utilities;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -16,6 +17,7 @@ public class SkillControler : MonoBehaviour
     private Skill skill;
     [SerializeField] private float skillVelocity;
     private InputManager input;
+    private SkillList skillList;
 
     [SerializeField] private LayerMask enemyLayer;
 
@@ -28,8 +30,9 @@ public class SkillControler : MonoBehaviour
         nRune = 0;
         equipment = GetComponent<Equipment>();
         mov = GetComponent<PlayerMovement>();
-        
+
         input = InputManager.Instance;
+        skillList = GetComponent<SkillList>();
     }
     
     private int getSkillIndex()
@@ -92,7 +95,7 @@ public class SkillControler : MonoBehaviour
 
     private void attack(InputAction.CallbackContext context)
     {
-        GameObject temp = Instantiate(Resources.Load<GameObject>(equipment.arma + "Attack"), transform);
+        GameObject temp = Instantiate(Resources.Load<GameObject>(equipment.weapon + "Attack"), transform);
         if (mov.right)
         {
             temp.transform.position = (Vector2)transform.position + new Vector2(1.1f, 0);
@@ -114,12 +117,12 @@ public class SkillControler : MonoBehaviour
         {
             int test = getSkillIndex();
             Debug.Log(test);
-            skill = SkillList.getSkillByIndex(test);
+            skill = skillList.getSkillByIndex(test);
             if(skill != null)
             {
                 if (!skill.cooldown.isCoolingDown)
                 {
-                    GameObject temp = Instantiate(skill.skillObject, transform);
+                    GameObject temp = Instantiate(Resources.Load<GameObject>(skill.name), transform);
                     if (skill.sight == ESightType.Targeted)
                     {
                         if (mov.right)
